@@ -1,10 +1,8 @@
 package com.wellsfargo.counselor.entity;
 
+import jakarta.persistence.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import java.time.LocalDate;
 
 @Entity
 public class Advisor {
@@ -13,10 +11,10 @@ public class Advisor {
     @GeneratedValue()
     private long advisorId;
 
-    @Column(nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @Column(nullable = false)
@@ -28,16 +26,29 @@ public class Advisor {
     @Column(nullable = false)
     private String email;
 
+    //new vars
+    @Column(name = "date_hired", nullable = false)
+    private LocalDate dateHired;
+
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive;
+
+    @Column(name = "password_hash", nullable = false)
+    private String passwordHash;
+
     protected Advisor() {
 
     }
 
-    public Advisor(String firstName, String lastName, String address, String phone, String email) {
+    public Advisor(String firstName, String lastName, String address, String phone, String email, LocalDate dateHired, boolean isActive, String passwordHash) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.phone = phone;
         this.email = email;
+        this.dateHired = dateHired;
+        this.isActive = isActive;
+        this.passwordHash = passwordHash;
     }
 
     public Long getAdvisorId() {
@@ -82,5 +93,30 @@ public class Advisor {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    //new methods for new vars
+    public LocalDate getDateHired() {
+        return dateHired;
+    }
+
+    public void setDateHired(LocalDate dateHired) {
+        this.dateHired = dateHired;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 }
